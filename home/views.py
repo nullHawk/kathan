@@ -4,18 +4,39 @@ from django.views.decorators.csrf import csrf_exempt
 from . import kathan_integrator as integrator
 import json
 from django.http import JsonResponse
+import requests
+
+languages = {1:"Tamil", 2:"Telugu", 3:"Hindi", 4:"Malayalam", 5:"Marathi", 6:"Bengali", 7:"Assamese", 8:"Gujarati", 9:"Kannada", 10:"Oriya", 11:"Punjabi"}
 
 # Create your views here.
 def index(request):
-    integrator.initialize(source="hi",target="ta")
-    r = integrator.get_request()
+    if request.method == 'POST':
 
-    js = json.loads(r.text)
-    txt = ""
-    for i,j in js.items():
-        txt += f"{i} : {j}</br>"
-    response = f"{r}\n{txt}"
-    return HttpResponse(response)
+        content = request.POST.get('content')
+        source_language = request.POST.get('source_language')
+        target_language = request.POST.get('target_language')
+
+        endpoint = f"http://{request.get_host()}/scaler/translate"
+        body={
+            "content": content,
+            "source_language": source_language,
+            "target_language": target_language
+        }
+        r = requests.post(endpoint, data=body)
+        js = json.loads(r.text)
+
+        response = {
+            "languages" : languages,
+            "content" : content,
+            "translated_content" : js['translated_content'],
+            "source_language": source_language,
+            "target_language": target_language
+        }
+        return render(request, 'home/index.html', response)
+    response = {
+        "languages" : languages,
+    }
+    return render(request, 'home/index.html', response)
 
 @csrf_exempt
 def translate(request):
