@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from . import kathan_integrator as integrator
 import json
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -39,7 +40,7 @@ def translate(request):
         "message": "Invalid Language Code",
         "translated_content": None,
         }
-        return render(request, 'home/index.html',response,)
+        return render(request, 'home/translate_result.html',response,)
     else:
         integrator.initialize(source=source_language, target=target_language)
         r = integrator.get_request()
@@ -51,7 +52,7 @@ def translate(request):
                 "message": "invalid input or language code",
                 "translated_content": None,
             }
-            return render(request, 'home/index.html',response)
+            return render(request, 'home/translate_result.html',response)
         else:
             serviceID = js["pipelineResponseConfig"][0]['config'][0]["serviceId"]
             #modelId = js["pipelineResponseConfig"][0]['config'][0]["modelId"]
@@ -74,15 +75,17 @@ def translate(request):
                     "message": output.text,
                     "translated_content": None,
                 }
-                return render(request, 'home/index.html',response)
+                return render(request, 'home/translate_result.html',response)
             else:
                 translated_content= output_js["pipelineResponse"][0]["output"][0]["target"]
-                response ={
-                    "status_code": output, #we will return error code
+                
+                response = {
+                    "status_code": str(output),
                     "message": "working",
-                    "translated_content": translated_content,
+                    "translated_content": str(translated_content)
                 }
-                return render(request, 'home/index.html',response)
+
+                return JsonResponse(response, json_dumps_params={'ensure_ascii': False})
             
 
 
