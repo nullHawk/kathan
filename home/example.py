@@ -1,5 +1,5 @@
 import requests
-import auth
+from . import auth
 
 userID = auth.userID
 ulcaApiKey = auth.ulcaApiKey
@@ -29,7 +29,7 @@ body = {
     }
 }
 
-r = requests.post(endpoint, headers=header, json=body)
+def get_request():
+    r = requests.post(endpoint, headers=header, json=body)
+    return r
 
-print(r)
-print(r.text)
