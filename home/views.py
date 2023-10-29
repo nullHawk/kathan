@@ -34,7 +34,6 @@ def translate(request):
  
 
     if source_language == -1 or target_language == -1:
-        print(request.POST)
         response ={
         "status_code": "error", #we will return error code
         "message": "Invalid Language Code",
@@ -48,7 +47,7 @@ def translate(request):
         js = json.loads(r.text)
         if "pipelineResponseConfig" not in js:
             response ={
-                "status_code": "eror", #we will return error code
+                "status_code": "error", #we will return error code
                 "message": "invalid input or language code",
                 "translated_content": None,
             }
