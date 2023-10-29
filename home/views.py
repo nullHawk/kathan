@@ -40,7 +40,7 @@ def translate(request):
         "message": "Invalid Language Code",
         "translated_content": None,
         }
-        return render(request, 'home/translate_result.html',response,)
+        return JsonResponse(response, json_dumps_params={'ensure_ascii': False})
     else:
         integrator.initialize(source=source_language, target=target_language)
         r = integrator.get_request()
@@ -52,7 +52,7 @@ def translate(request):
                 "message": "invalid input or language code",
                 "translated_content": None,
             }
-            return render(request, 'home/translate_result.html',response)
+            return JsonResponse(response, json_dumps_params={'ensure_ascii': False})
         else:
             serviceID = js["pipelineResponseConfig"][0]['config'][0]["serviceId"]
             #modelId = js["pipelineResponseConfig"][0]['config'][0]["modelId"]
@@ -71,11 +71,11 @@ def translate(request):
             output_js = json.loads(output.text)
             if "pipelineResponse" not in output_js:
                 response ={
-                    "status_code": output, #we will return error code
+                    "status_code": str(output), #we will return error code
                     "message": output.text,
                     "translated_content": None,
                 }
-                return render(request, 'home/translate_result.html',response)
+                return JsonResponse(response, json_dumps_params={'ensure_ascii': False})
             else:
                 translated_content= output_js["pipelineResponse"][0]["output"][0]["target"]
                 
