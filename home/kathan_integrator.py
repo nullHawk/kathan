@@ -1,10 +1,10 @@
 import requests
 import os
-#from . import auth use at local server only
+from . import auth 
 
-userID = os.environ.get("userID")
-ulcaApiKey = os.environ.get("ulcApiKey")
-pipelineId = os.environ.get("pipelineId")
+userID = auth.userID
+ulcaApiKey = auth.ulcaApiKey
+pipelineId = auth.pipelineId
 
 source_lang = ""
 target_lang = ""
