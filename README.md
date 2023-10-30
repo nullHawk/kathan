@@ -20,3 +20,5 @@ data = {
 <li>Kannada (kn) : 9</li>
 <li>Oriya (or) : 10</li>
 <li>Punjabi (pa) : 11</li>
+<h2>Screen Short</h2>
+![image](https://github.com/nullHawk/kathan/assets/83297944/3c9b4cf1-a9d6-4752-bce8-147fe8d608b5)
