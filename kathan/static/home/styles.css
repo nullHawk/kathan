@@ -1,0 +1,36 @@
+.body{
+    margin: 0px;
+}
+
+.header{
+    padding:5px;
+    padding-left: 15px;
+    background-color: #494D5F;
+}
+.form{
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    padding: 5px;
+    display: grid;
+}
+.input.output{
+    padding: 20px;
+    margin: 20px;
+}
+.btn-container{
+    display: flex;
+    justify-content: center;
+}
+
+#input-area{
+    display: inline-flex;
+    padding: 5px;
+}
+#heading{
+    color: #e5eaf5;
+}
+#btn{
+    padding: 5px;
+    width: fit-content;
+    align-self: center;
+}
