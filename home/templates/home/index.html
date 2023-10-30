@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Kathan</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/styles.css' %}">
+    </head>
+    <body>
+        <div class="header">
+            <h1 id="heading">Kathan</h1>
+        </div>
+        <div id="container">
+            <form class="form" method="post" action="{% url 'index' %}">
+                {% csrf_token %}
+                <div id="input-area">
+                    <div class="input">
+                        <select id="itemSelect" name="source_language">
+                            <option value="-1" disabled {% if not source_language %} selected {% endif %}>Select Language</option>
+                            {% for index, value in languages.items %}
+                                <option value="{{ index }}" {% if index == source_language %} selected {% endif %}>{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <br>
+                        <textarea type="text" class="textarea" name="content" required>{%if content %}{{content}}{%else%} Enter Text to translate {%endif%}</textarea><br><br>
+                    </div>
+                    
+                    <div class="output">
+                        <select id="itemSelect" name="target_language">
+                            <option value="-1" disabled {%if target_language%} {%else%} selected {%endif%}>Select Language</option>
+                            {% for index,value in languages.items %}
+                                <option value={{ index }} {% if target_language == index %} selected {% endif %} >{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <textarea  type="text" class="textarea" name="translated_content" >{%if translated_content %}{{translated_content|escape}}{%else%}Your translated text goes header{%endif%}</textarea><br><br>
+                    </div>
+                </div>
+                <br>
+                <div id="btn-container">
+                    <input class="btn btn-primary"  type="submit" value="Submit">
+                </div>
+                
+        </form>
+        </div>
+        
+        
+    </body>
+</html>
