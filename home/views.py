@@ -13,8 +13,8 @@ def index(request):
     if request.method == 'POST':
 
         content = request.POST.get('content')
-        source_language = request.POST.get('source_language')
-        target_language = request.POST.get('target_language')
+        source_language = int(request.POST.get('source_language'))
+        target_language = int(request.POST.get('target_language'))
 
         endpoint = f"http://{request.get_host()}/scaler/translate"
         body={
