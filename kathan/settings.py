@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-3t!ekq$$$wt$z%l4fwg(d&))w!p2n&04y=!+a99+%&9aw=ex)v
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://kathan.azurewebsites.net/']
+CSRF_TRUSTED_ORIGINS = ['https://kathan.azurewebsites.net']
 
 
 # Application definition
@@ -134,7 +134,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'kathan/static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'kathan/static'),]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

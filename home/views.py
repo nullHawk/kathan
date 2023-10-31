@@ -9,7 +9,6 @@ import requests
 languages = {1:"Tamil", 2:"Telugu", 3:"Hindi", 4:"Malayalam", 5:"Marathi", 6:"Bengali", 7:"Assamese", 8:"Gujarati", 9:"Kannada", 10:"Oriya", 11:"Punjabi"}
 
 # Create your views here.
-@csrf_exempt
 def index(request):
     if request.method == 'POST':
 
