@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-3t!ekq$$$wt$z%l4fwg(d&))w!p2n&04y=!+a99+%&9aw=ex)v
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://kathan.azurewebsites.net/']
 
 
 # Application definition
