@@ -5,6 +5,7 @@ from . import kathan_integrator as integrator
 import json
 from django.http import JsonResponse
 import requests
+from django.urls import reverse
 
 languages = {1:"Tamil", 2:"Telugu", 3:"Hindi", 4:"Malayalam", 5:"Marathi", 6:"Bengali", 7:"Assamese", 8:"Gujarati", 9:"Kannada", 10:"Oriya", 11:"Punjabi"}
 
@@ -16,7 +17,7 @@ def index(request):
         source_language = int(request.POST.get('source_language'))
         target_language = int(request.POST.get('target_language'))
 
-        endpoint = f"http://{request.get_host()}/scaler/translate"
+        endpoint = request.build_absolute_uri(reverse('translate'))
         body={
             "content": content,
             "source_language": source_language,
